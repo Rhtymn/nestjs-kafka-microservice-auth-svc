@@ -11,15 +11,18 @@ export class UserService {
 
   async createUser(user: RegisterRequest): Promise<User> {
     const newUser = new User();
-    newUser.email = user.email;
+    newUser.email = user.email.toLowerCase();
     newUser.username = user.username;
     newUser.password = user.password;
+    newUser.role = user.role;
 
     return await this.userRepository.save(newUser);
   }
 
   async isUserExists(email: string): Promise<boolean> {
-    const user = await this.userRepository.findOneBy({ email });
+    const user = await this.userRepository.findOneBy({
+      email: email.toLowerCase(),
+    });
 
     if (user) {
       return true;
