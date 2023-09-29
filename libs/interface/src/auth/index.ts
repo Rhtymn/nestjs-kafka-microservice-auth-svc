@@ -2,6 +2,7 @@ export interface RegisterRequest {
   email: string;
   password: string;
   username: string;
+  role: UserRole;
 }
 
 export interface RegisterResponse {
@@ -24,6 +25,7 @@ export interface JwtTokenPayload {
   id: string;
   email: string;
   username: string;
+  role: UserRole;
 }
 
 export interface DecodedJwtTokenPayload extends JwtTokenPayload {
@@ -39,4 +41,10 @@ export interface ValidateTokenResponse {
   status: number;
   error: string[];
   payload: JwtTokenPayload | null;
+}
+
+export enum UserRole {
+  ADMIN = 'ADMIN',
+  SALES = 'SALES',
+  OWNER = 'OWNER',
 }
